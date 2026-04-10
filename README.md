@@ -115,13 +115,14 @@ Data Layer
 banklite-qa-automation-framework/
 │
 ├── docs/                  # QA documentation (requirements, AC, scenarios, strategy)
-├── test_management/       # Test cases, traceability, execution logs
 ├── api_testing/
-│   └── postman/           # Postman collection and environment
-├── automation/            # API and UI automation framework
-├── bugs/                  # Defect tracking and templates
-├── reports/               # Execution reports and summaries
-├── app_reference/         # Reference to application under test
+│   └── postman/           # Postman collection, environment, and usage guide
+├── automation/
+│   ├── api/               # pytest API tests and shared fixtures
+│   ├── api_client/        # reusable request wrappers
+│   └── utils/             # config and reusable assertions
+├── requirements.txt       # Python dependencies for pytest API testing
+├── pytest.ini             # pytest configuration and markers
 └── README.md
 ```
 
@@ -136,7 +137,7 @@ banklite-qa-automation-framework/
 | Test Scenarios             | ✅ Completed    |
 | Test Cases                 | ✅ Completed    |
 | Postman Collection         | ✅ Completed    |
-| API Automation (pytest)    | 🚧 In Progress |
+| API Automation (pytest)    | ✅ Starter Added |
 | UI Automation (Playwright) | 🚧 Planned     |
 
 ---
@@ -195,6 +196,30 @@ The framework supports:
    * password
 
 4. Run via Postman Runner
+
+---
+
+## 🚀 How to Run (pytest API Automation)
+
+1. Start the BankLite application locally.
+2. Create and activate a virtual environment.
+3. Install dependencies:
+
+   ```
+   pip install -r requirements.txt
+   ```
+
+4. Run the starter API suite:
+
+   ```
+   pytest automation/api -m api
+   ```
+
+The current pytest starter layer includes:
+- authentication tests
+- balance tests
+- reusable API client wrappers
+- shared fixtures and assertion helpers
 
 ---
 

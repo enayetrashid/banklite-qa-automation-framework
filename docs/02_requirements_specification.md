@@ -1,4 +1,4 @@
-# Requirements Specification — BankLite QA Automation Framework
+# Requirements Specification -BankLite QA Automation Framework
 
 ## 1. Introduction
 

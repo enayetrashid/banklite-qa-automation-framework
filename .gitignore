@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+.env
+automation/evidence/logs/*
+!automation/evidence/logs/.gitkeep
+automation/evidence/screenshots/*
+!automation/evidence/screenshots/.gitkeep
