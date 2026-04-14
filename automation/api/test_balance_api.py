@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import logging
+
 import pytest
 
 from automation.utils.assertions import (
@@ -11,11 +13,17 @@ from automation.utils.assertions import (
 )
 from automation.utils.config import Config
 
+logger = logging.getLogger(__name__)
+
 
 @pytest.mark.api
 @pytest.mark.smoke
 def test_get_balance_with_valid_account(account_client) -> None:
-    response = account_client.get_balance(Config.ACCOUNT_ID)
+    logger.info("Running valid balance API test.")
+    response = account_client.get_balance(
+        Config.ACCOUNT_ID,
+        test_name="test_get_balance_with_valid_account",
+    )
 
     assert response.status_code == 200
     payload = response.json()
@@ -26,7 +34,11 @@ def test_get_balance_with_valid_account(account_client) -> None:
 
 @pytest.mark.api
 def test_get_balance_with_invalid_account(account_client) -> None:
-    response = account_client.get_balance(Config.INVALID_ACCOUNT_ID)
+    logger.info("Running invalid account balance API test.")
+    response = account_client.get_balance(
+        Config.INVALID_ACCOUNT_ID,
+        test_name="test_get_balance_with_invalid_account",
+    )
 
     assert response.status_code == 404
     payload = response.json()

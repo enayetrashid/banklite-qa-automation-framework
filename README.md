@@ -70,6 +70,7 @@ This project follows a layered QA approach:
 * Reusable API client layer
 * Fixtures and assertions
 * Scalable test design
+* Evidence capture and execution logging
 
 ---
 
@@ -119,13 +120,12 @@ banklite-qa-automation-framework/
 │   └── postman/           # Postman collection, environment, and usage guide
 ├── automation/
 │   ├── api/               # pytest API tests and shared fixtures
-│   ├── ui/                # Playwright UI tests and browser fixtures
-│   ├── pages/             # Page Object Model classes
 │   ├── api_client/        # reusable request wrappers
-│   ├── evidence/          # screenshots and logs
-│   └── utils/             # config and reusable assertions
-├── requirements.txt       # Python dependencies for API and UI automation
-├── pytest.ini             # pytest configuration and markers
+│   ├── evidence/          # logs, screenshots, and evidence notes
+│   └── utils/             # config, assertions, and evidence helpers
+├── reports/               # execution summaries and generated reports
+├── requirements.txt       # Python dependencies for pytest API testing
+├── pytest.ini             # pytest configuration, markers, and logging
 └── README.md
 ```
 
@@ -141,7 +141,7 @@ banklite-qa-automation-framework/
 | Test Cases                 | ✅ Completed    |
 | Postman Collection         | ✅ Completed    |
 | API Automation (pytest)    | ✅ Starter Added |
-| UI Automation (Playwright) | ✅ Starter Added |
+| UI Automation (Playwright) | 🚧 Planned     |
 
 ---
 
@@ -223,42 +223,6 @@ The current pytest starter layer includes:
 - balance tests
 - reusable API client wrappers
 - shared fixtures and assertion helpers
-
-## 🚀 How to Run (Playwright UI Automation)
-
-1. Start the BankLite application locally.
-2. Create and activate a virtual environment.
-3. Install dependencies:
-
-   ```
-   pip install -r requirements.txt
-   ```
-
-4. Install Playwright browser binaries:
-
-   ```
-   playwright install
-   ```
-
-5. Run the UI automation suite:
-
-   ```
-   pytest automation/ui -m ui
-   ```
-
-6. Run only the smoke UI tests:
-
-   ```
-   pytest automation/ui -m "ui and smoke"
-   ```
-
-The current UI starter layer includes:
-- login flow tests
-- dashboard balance verification
-- deposit, withdrawal, and transfer tests
-- transaction history checks
-- Page Object Model starter classes
-- automatic screenshot capture on failure
 
 ---
 

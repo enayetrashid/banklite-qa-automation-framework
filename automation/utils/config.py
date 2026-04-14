@@ -1,4 +1,4 @@
-"""Project-wide configuration helpers for API and UI automation."""
+"""Project-wide configuration helpers for API automation and evidence capture."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ import os
 
 
 class Config:
-    """Central place for runtime configuration used by API tests."""
+    """Central place for runtime configuration."""
 
     BASE_URL = os.getenv("BANKLITE_BASE_URL", "http://127.0.0.1:5000")
     API_PREFIX = os.getenv("BANKLITE_API_PREFIX", "/api")
@@ -18,19 +18,11 @@ class Config:
     INVALID_ACCOUNT_ID = os.getenv("BANKLITE_INVALID_ACCOUNT_ID", "A9999")
     REQUEST_TIMEOUT = int(os.getenv("BANKLITE_TIMEOUT", "10"))
 
+    EVIDENCE_ROOT = os.getenv("BANKLITE_EVIDENCE_ROOT", "automation/evidence")
+    LOG_DIR = os.getenv("BANKLITE_LOG_DIR", f"{EVIDENCE_ROOT}/logs")
+    SCREENSHOT_DIR = os.getenv("BANKLITE_SCREENSHOT_DIR", f"{EVIDENCE_ROOT}/screenshots")
+
     @classmethod
     def api_url(cls, path: str) -> str:
         path = path if path.startswith("/") else f"/{path}"
         return f"{cls.BASE_URL}{cls.API_PREFIX}{path}"
-
-
-class UIConfig:
-    """Runtime configuration for Playwright UI automation."""
-
-    BASE_URL = os.getenv("BANKLITE_UI_BASE_URL", Config.BASE_URL)
-    HEADLESS = os.getenv("BANKLITE_HEADLESS", "true").lower() == "true"
-    DEFAULT_TIMEOUT_MS = int(os.getenv("BANKLITE_UI_TIMEOUT_MS", "8000"))
-    SCREENSHOT_DIR = os.getenv(
-        "BANKLITE_SCREENSHOT_DIR",
-        "automation/evidence/screenshots",
-    )

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import logging
+
 import pytest
 
 from automation.utils.assertions import (
@@ -11,11 +13,14 @@ from automation.utils.assertions import (
 )
 from automation.utils.config import Config
 
+logger = logging.getLogger(__name__)
+
 
 @pytest.mark.api
 @pytest.mark.smoke
 def test_login_with_valid_credentials(auth_client, valid_credentials) -> None:
-    response = auth_client.login(**valid_credentials)
+    logger.info("Running valid login API test.")
+    response = auth_client.login(**valid_credentials, test_name="test_login_with_valid_credentials")
 
     assert response.status_code == 200
     payload = response.json()
@@ -26,7 +31,12 @@ def test_login_with_valid_credentials(auth_client, valid_credentials) -> None:
 
 @pytest.mark.api
 def test_login_with_invalid_password(auth_client) -> None:
-    response = auth_client.login(Config.LOGIN_USERNAME, Config.INVALID_PASSWORD)
+    logger.info("Running invalid password login API test.")
+    response = auth_client.login(
+        Config.LOGIN_USERNAME,
+        Config.INVALID_PASSWORD,
+        test_name="test_login_with_invalid_password",
+    )
 
     assert response.status_code == 401
     payload = response.json()
